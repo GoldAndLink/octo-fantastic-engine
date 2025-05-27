@@ -7,6 +7,31 @@ export type Json =
   | Json[]
 
 export type Database = {
+  graphql_public: {
+    Tables: {
+      [_ in never]: never
+    }
+    Views: {
+      [_ in never]: never
+    }
+    Functions: {
+      graphql: {
+        Args: {
+          operationName?: string
+          query?: string
+          variables?: Json
+          extensions?: Json
+        }
+        Returns: Json
+      }
+    }
+    Enums: {
+      [_ in never]: never
+    }
+    CompositeTypes: {
+      [_ in never]: never
+    }
+  }
   public: {
     Tables: {
       client_stage_progress: {
@@ -419,8 +444,7 @@ export type Database = {
           },
         ]
       }
-      
-      : {
+      stages: {
         Row: {
           id: number
           name: string | null
@@ -528,6 +552,37 @@ export type Database = {
     }
     Functions: {
       current_app_role: {
+        Args: Record<PropertyKey, never>
+        Returns: Database["public"]["Enums"]["user_role"]
+      }
+      dashboard_range: {
+        Args: { p_filter: string }
+        Returns: unknown
+      }
+      get_admin_clients: {
+        Args: { p_filter: string; p_sort?: string; p_dir?: string }
+        Returns: {
+          id: string
+          name: string
+          contract_start: string
+          workflows: number
+          nodes: number
+          executions: number
+          exceptions: number
+          revenue: number
+        }[]
+      }
+      get_admin_dashboard_kpis: {
+        Args: { p_filter: string }
+        Returns: {
+          total_workflows: number
+          total_exceptions: number
+          time_saved: number
+          revenue: number
+          active_clients: number
+        }[]
+      }
+      get_current_role: {
         Args: Record<PropertyKey, never>
         Returns: Database["public"]["Enums"]["user_role"]
       }
@@ -669,6 +724,9 @@ export type CompositeTypes<
     : never
 
 export const Constants = {
+  graphql_public: {
+    Enums: {},
+  },
   public: {
     Enums: {
       billing_cadence: ["MONTHLY", "QUARTERLY", "YEARLY"],

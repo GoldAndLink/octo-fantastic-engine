@@ -59,13 +59,13 @@ class PerformanceMonitor {
       window.performance.mark(name);
     }
 
-    if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('event', 'performance_metric', {
-        metric_name: name,
-        metric_value: value,
-        ...labels,
-      });
-    }
+    // if (typeof window !== 'undefined' && window.gtag) {
+    //   window.gtag('event', 'performance_metric', {
+    //     metric_name: name,
+    //     metric_value: value,
+    //     ...labels,
+    //   });
+    // }
   }
 
   public getMetric(name: MetricName): { value: number; timestamp: number; labels?: MetricLabels } | undefined {
