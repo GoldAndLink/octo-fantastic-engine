@@ -1,6 +1,6 @@
 # Braintrust Nexus
 ## Live version
-
+https://octo-fantastic-engine.vercel.app
 
 ## Tech stack
 - Next.js
